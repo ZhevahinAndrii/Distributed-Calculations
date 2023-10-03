@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FlockSearch extends RecursiveAction {
     public static AtomicBoolean stopFlag = new AtomicBoolean(false);
+    private static boolean isFinished =false;
     public static int location_of_winnie;
     private final int startArea, finishArea, flocknumber;
 
@@ -15,10 +16,10 @@ public class FlockSearch extends RecursiveAction {
 
     }
     @Override
-    protected void compute(){
+    protected synchronized void compute(){
         System.out.println("Flock number "+this.flocknumber + " started to search");
         for (int i=this.startArea; i<this.finishArea; i++){
-            if(stopFlag.get()){
+            if(isFinished){
                 try
                 {
                 Thread.sleep(500);
@@ -31,7 +32,7 @@ public class FlockSearch extends RecursiveAction {
             }
             if(i == location_of_winnie){
                 System.out.println("Flock number "+this.flocknumber+" founded the Winnie!");
-                stopFlag.set(true);
+                isFinished=true;
                 return;
             }
             try{
