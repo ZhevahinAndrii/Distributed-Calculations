@@ -5,11 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.FileAttribute;
 import java.util.List;
-
+import java.util.Random;
 import static taskone.Writer.OperationType.DELETE;
 import static taskone.Writer.OperationType.APPEND;
 
 public class Main {
+    public static final Random random = new Random();
     public static final CustomRWLock CUSTOM_RW_LOCK = new CustomRWLock();
     public static void main(String[] args) throws IOException{
         final String FILE_NAME = "C:\\Distibuted Calculations\\Laboratory 4\\src\\taskone\\database.txt";

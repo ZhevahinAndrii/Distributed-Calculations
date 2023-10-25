@@ -5,7 +5,7 @@ import java.nio.file.Path;
 
 import static taskone.Main.CUSTOM_RW_LOCK;
 import static taskone.Main.justSleep;
-
+import static taskone.Main.random;
 public class SearchByLastName extends Thread{
     private final String FILE_NAME,lastName;
 
@@ -35,7 +35,7 @@ public class SearchByLastName extends Thread{
             }
 
             CUSTOM_RW_LOCK.readUnlock();
-            justSleep(200);
+            justSleep(random.nextInt(100,300));
         }
     }
 

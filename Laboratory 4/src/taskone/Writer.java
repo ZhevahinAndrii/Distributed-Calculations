@@ -2,7 +2,7 @@ package taskone;
 import static taskone.Main.CUSTOM_RW_LOCK;
 import static taskone.Main.justSleep;
 import static taskone.Writer.OperationType.DELETE;
-
+import static taskone.Main.random;
 import java.io.IOException;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
@@ -44,7 +44,7 @@ public class Writer extends Thread{
                     }
 
                     CUSTOM_RW_LOCK.writeUnlock();
-                    justSleep(2000);
+                    justSleep(random.nextInt(1500,2500));
                 }
             }
             else{
@@ -58,7 +58,7 @@ public class Writer extends Thread{
                 }
 
                 CUSTOM_RW_LOCK.writeUnlock();
-                justSleep(2000);
+                justSleep(random.nextInt(1500,2500));
             }
         }
     }
