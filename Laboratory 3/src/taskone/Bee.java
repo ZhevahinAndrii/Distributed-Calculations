@@ -1,11 +1,11 @@
 package taskone;
 import java.util.Random;
 public class Bee implements Runnable{
-    private static Random random;
-    private Pot pot;
-    private Bear bear;
+    private static final  Random random = new Random();
+    private final Pot pot;
+    private final Bear bear;
     public Bee(Pot pot,Bear bear){
-        random = new Random();
+
         this.pot=pot;
         this.bear = bear;
 

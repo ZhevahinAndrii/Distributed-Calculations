@@ -27,6 +27,7 @@ public class Main {
             searches[i].fork();
         }
         searches[0].compute();
+
         for(int i=1;i<flock_number;i++){
             searches[i].join();
         }

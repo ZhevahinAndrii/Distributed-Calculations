@@ -1,10 +1,7 @@
 package taskone;
-import java.util.Random;
 import java.util.concurrent.RecursiveAction;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 public class FlockSearch extends RecursiveAction {
-    public static AtomicBoolean stopFlag = new AtomicBoolean(false);
+
     private static boolean isFinished =false;
     public static int location_of_winnie;
     private final int startArea, finishArea, flocknumber;

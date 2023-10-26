@@ -14,19 +14,13 @@ public class Checker {
         return this.isRunning;
     }
     public void equalityCheck(){
-        boolean isEqual = true;
+        int equal = threadsNumber;
         Arrays.sort(threadsInfo);
-        for(int i=1;i<threadsInfo.length-2;i++){
-            if(threadsInfo[i]!=threadsInfo[i+1]){
-                isEqual = false;
-                break;
-            }
+        for(int i=0;i<threadsInfo.length-1;i++){
+            if(threadsInfo[i]!=threadsInfo[i+1]) equal--;
         }
-        if(isEqual){
-            if(threadsInfo[0]==threadsInfo[1]|| threadsInfo[threadsInfo.length-1] == threadsInfo[1]){
+        if(equal>=3){
                 isRunning = false;
-                System.out.println("Are equal");
-            }
         }
     }
     public synchronized void getInfo(int data){

@@ -60,7 +60,6 @@ public class Storage {
                 condition.await();
             }
             if(!goods.isEmpty()){
-
                 good = goods.get(goods.size()-1);
                 goods.remove(good);
                 System.out.println(Thread.currentThread().getName()+ " gets " +good.toString()+" from "+name);
@@ -74,7 +73,6 @@ public class Storage {
             e.printStackTrace();
         }
         finally{
-
             return good;
         }
     }
