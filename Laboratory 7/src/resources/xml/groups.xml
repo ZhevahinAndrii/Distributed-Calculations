@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<educationaldepartment>
+    <group id="1" name="IPS-31" studying_program="Software engineering">
+        <student id="1" first_name="Andrii" last_name="Zhevahin" averageMark="78.54"/>
+        <student id="2" first_name="Vladislav" last_name="Voloshyn" averageMark="85.23"/>
+        <student id="3" first_name="Alex" last_name="Volkov" averageMark="95.24"/>
+
+    </group>
+    <group id="2" name="IPS-32">
+        <student id="4" first_name="Stanislav" last_name="Kobzar" averageMark="60.8"/>
+        <student id="5" first_name="Mihailo" last_name="Tyschenko" averageMark="97.6"/>
+    </group>
+</educationaldepartment>
