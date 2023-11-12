@@ -95,8 +95,6 @@ public class EducationalDepartment {
         DocumentBuilderFactory dbf;
         DocumentBuilder db;
 
-
-
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema s;
         try{
@@ -157,12 +155,53 @@ public class EducationalDepartment {
     }
     public void addGroup(int groupId,String groupName,String groupStudyingProgram){
         boolean isIdPresent = groups.stream().anyMatch(group -> group.getId()==groupId);
-        if(isIdPresent) throw new IllegalArgumentException("Entered ID is already present in groups list");
+        if(isIdPresent) {
+            System.out.println("Entered ID is already present in groups list");
+            return;
+        }
         groups.add(new Group(groupId,groupName,groupStudyingProgram));
     }
     public Group getGroup(int groupId) {
-        return groups.stream().filter(group->group.getId()==groupId).findFirst().orElseThrow(()->new NoSuchElementException("No group found with ID:"+groupId));
+        try {
+            return groups.stream().filter(group -> group.getId() == groupId).findFirst().orElseThrow(() -> new NoSuchElementException("No group found with ID:" + groupId));
+        }
+        catch (NoSuchElementException e){
+            System.out.println("No group found with ID:" + groupId);
+            return null;
+        }
     }
+    public void updateGroup(int groupId,String name,String studying_program){
+
+        if (groups.stream().anyMatch(group->group.getId()==groupId)){
+            for(Group group:groups){
+                if(group.getId()==groupId){
+                    if(!Objects.equals(name, " "))
+                        group.setName(name);
+                    if(!Objects.equals(studying_program,""))
+                        group.setStudyingProgram(studying_program);
+                }
+            }
+        }
+        else{
+            throw new NoSuchElementException("There is no such a group with a given ID to update");
+        }
+
+    }
+    public void deleteGroup(int groupId){
+        try {
+            students.removeIf(student -> student.getGroup().getId() == groupId);
+        }
+        catch (NullPointerException e){
+            System.out.println("There are no students for this group to delete");
+        }
+        try{
+            groups.removeIf(group -> group.getId() == groupId);
+        }
+        catch (NullPointerException e){
+            throw new NoSuchElementException("No such a group with this id");
+        }
+    }
+
     public Group getGroupInd(int index){
         try{
             return groups.get(index);
@@ -175,23 +214,43 @@ public class EducationalDepartment {
     public int countGroups(){
         return groups.size();
     }
-
-    public void deleteGroup(int groupId){
-        try {
-            students.removeIf(student->student.getGroup().getId()==groupId);
-            groups.removeIf(group -> group.getId() == groupId);
-
-        }
-        catch (NullPointerException e){
-            throw new IllegalArgumentException("No such a group with this id");
-        }
+    public int countStudentsInGroup(int groupId){
+        return (int)students.stream().filter(student -> student.getGroup().getId()==groupId).count();
     }
+    public int countStudents() {
+        return students.size();
+    }
+
     public void addStudent(int studentId,String first_name,String last_name,double average_mark,int groupId){
-        if (students.stream().anyMatch(student->student.id==studentId)) throw new IllegalArgumentException("Student with entered id already exists");
-        if(groups.stream().filter(group->group.getId()==groupId).findFirst().orElse(null)==null) throw new IllegalArgumentException("There is no such a group with entered id");
+        if (students.stream().anyMatch(student->student.id==studentId)) {
+            System.out.println("Student with entered id already exists");
+            return;
+        }
+        if(groups.stream().filter(group->group.getId()==groupId).findFirst().orElse(null)==null) {
+            System.out.println("There is no such a group with entered id");
+            return;
+        }
         students.add(new Student(studentId,first_name,last_name,average_mark,groups.stream().filter(group->group.getId()==groupId).findFirst().orElse(null)));
     }
+    public Student getStudent(int studentId){
+        try {
+            return students.stream().filter(student -> student.getId() == studentId).findFirst().orElseThrow(() -> new NoSuchElementException("No student found with ID:" + studentId));
 
+        }
+        catch (NoSuchElementException e){
+            System.out.println("No student found with ID:" + studentId);
+            return null;
+        }
+    }
+
+    public void deleteStudent(int studentId){
+        try{
+            students.removeIf(student->student.getId()==studentId);
+        }
+        catch (NullPointerException e){
+            throw new NoSuchElementException("There is no student with ID:"+studentId);
+        }
+    }
     public void print(){
         for(Group group:groups){
             System.out.println(" - "+group);
@@ -203,10 +262,14 @@ public class EducationalDepartment {
         }
         System.out.println();
     }
+    public void clearDepartment(){
+        this.students.clear();
+        this.groups.clear();
+    }
 
     static class SimpleErrorHandler implements ErrorHandler{
         @Override
-        public void warning(SAXParseException e) throws SAXException{
+        public void warning(SAXParseException e) {
             System.out.println("Warning in line number "+e.getLineNumber()+":"+e.getMessage());
         }
         @Override

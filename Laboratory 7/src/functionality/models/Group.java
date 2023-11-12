@@ -1,16 +1,16 @@
 package models;
 import java.io.Serializable;
 public class Group implements Serializable{
-    private int id;
+    private Integer id;
 
     private String name;
     private String studyingProgram;
-    public Group(int id,String name){
+    public Group(Integer id,String name){
         this.id = id;
         this.name = name;
         this.studyingProgram="";
     }
-    public Group(int id,String name,String studyingProgram){
+    public Group(Integer id,String name,String studyingProgram){
         this(id,name);
         this.studyingProgram = studyingProgram;
     }
@@ -24,7 +24,13 @@ public class Group implements Serializable{
     public String getStudyingProgram(){
         return this.studyingProgram;
     }
-    public int getId() {
+    public Integer getId() {
         return this.id;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public void setStudyingProgram(String studyingProgram){
+        this.studyingProgram = studyingProgram;
     }
 }

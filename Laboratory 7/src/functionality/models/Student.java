@@ -9,7 +9,7 @@ public class Student implements Serializable{
     private Group group;
     private double averageMark;
 
-    public Student(int id,String first_name,String last_name,double average_mark,Group group){
+    public Student(Integer id,String first_name,String last_name,double average_mark,Group group){
         this.id = id;
         this.firstName = first_name;
         this.lastName = last_name;
@@ -19,6 +19,9 @@ public class Student implements Serializable{
     @Override
     public String toString(){
         return "Student{id="+id+",first_name='"+firstName+"',last_name='"+lastName+"'average_mark="+averageMark+",group="+group+"}";
+    }
+    public Integer getId(){
+        return this.id;
     }
     public String getFirstName(){
         return this.firstName;
