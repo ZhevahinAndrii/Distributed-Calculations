@@ -13,7 +13,7 @@ public class Main {
 
         String operation = "0";
 
-        while(!operation.equals("9")){
+        while(!operation.equals("14")){
             System.out.println("\t1. Add group;");
             System.out.println("\t2. Get number of groups;");
             System.out.println("\t3. Get group by id;");
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("\t11. Print all");
             System.out.println("\t12. Save all");
             System.out.println("\t13. Refresh from XML file;");
-            System.out.println("\t13. Exit");
+            System.out.println("\t14. Exit");
 
             System.out.println("\nChoose your operation:");
 
