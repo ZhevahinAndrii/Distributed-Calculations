@@ -3,7 +3,7 @@ package models;
 import java.io.Serializable;
 
 public class Student implements Serializable{
-    public Integer id;
+    private final Integer id;
     private final String firstName;
     private final String lastName;
     private final Group group;

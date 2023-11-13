@@ -67,7 +67,7 @@ public class EducationalDepartment {
             for(Student student:students){
                 if(Objects.equals(student.getGroup().getId(), group.getId())){
                     Element studentElem = doc.createElement(STUDENT_TAG);
-                    studentElem.setAttribute(STUDENT_ID_ATTRIBUTE,String.valueOf(student.id));
+                    studentElem.setAttribute(STUDENT_ID_ATTRIBUTE,String.valueOf(student.getId()));
                     studentElem.setAttribute(STUDENT_FNAME_ATTRIBUTE,student.getFirstName());
                     studentElem.setAttribute(STUDENT_LNAME_ATTRIBUTE,student.getLastName());
                     studentElem.setAttribute(STUDENT_AVERAGE_MARK_ATTRIBUTE,String.valueOf(student.getAverageMark()));
@@ -214,7 +214,7 @@ public class EducationalDepartment {
     }
 
     public void addStudent(int studentId,String first_name,String last_name,double average_mark,int groupId){
-        if (students.stream().anyMatch(student->student.id==studentId)) {
+        if (students.stream().anyMatch(student->student.getId()==studentId)) {
             System.out.println("Student with entered id already exists");
             return;
         }

@@ -2,7 +2,6 @@ package models;
 import java.io.Serializable;
 public class Group implements Serializable{
     private final Integer id;
-
     private String name;
     private String studyingProgram;
     public Group(Integer id,String name){
