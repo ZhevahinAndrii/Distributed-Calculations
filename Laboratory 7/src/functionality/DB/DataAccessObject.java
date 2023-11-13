@@ -69,20 +69,20 @@ public class DataAccessObject {
             throw new RuntimeException(e);
         }
     }
-    public void deleteGroup(int id) {
+    public int deleteGroup(int id) {
         try {
             PreparedStatement ps = connection.prepareStatement("DELETE FROM `group` WHERE id = ?");
             ps.setInt(1, id);
-            ps.executeUpdate();
+            return ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void deleteStudent(int id){
+    public int deleteStudent(int id){
         try{
             PreparedStatement ps = connection.prepareStatement("DELETE FROM student WHERE id=?");
             ps.setInt(1,id);
-            ps.executeUpdate();
+            return ps.executeUpdate();
         }
         catch (SQLException e){
             throw new RuntimeException(e);
@@ -133,6 +133,7 @@ public class DataAccessObject {
         }
     }
     public Optional<Student> findStudentById(int id) {
+
         try {
             PreparedStatement ps = connection.prepareStatement("SELECT * FROM student WHERE id = ?");
             ps.setInt(1, id);
@@ -163,6 +164,7 @@ public class DataAccessObject {
         while(resultSet.next()){
             groups.add(new Group(resultSet.getInt("id"),resultSet.getString("name"),resultSet.getString("studying_program")));
         }
+
         return groups;
         }
         catch (SQLException e){
@@ -192,11 +194,46 @@ public class DataAccessObject {
                         group
                 ));
             }
+            ps.close();
             return students;
         }
         catch (SQLException |RuntimeException e){
             throw new RuntimeException(e);
         }
     }
+    public Optional<Integer> countGroups(){
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) as groups_count FROM `group`");
+            ResultSet result = ps.executeQuery();
+            if(result.next()){
+                int groups_count = result.getInt("groups_count");
+                result.close();
+                return Optional.of(groups_count);
+            }
+            else{
+                return Optional.empty();
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+    public Optional<Integer> countStudents(){
+        try{
+            PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) as students_count from student");
+            ResultSet result = ps.executeQuery();
+            if(result.next()){
+                int students_count = result.getInt("students_count");
+                result.close();
+                return Optional.of(students_count);
+            }
+            else{
+                return Optional.empty();
+            }
 
+        }
+        catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

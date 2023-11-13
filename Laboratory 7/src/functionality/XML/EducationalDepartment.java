@@ -65,7 +65,7 @@ public class EducationalDepartment {
             root.appendChild(groupElem);
 
             for(Student student:students){
-                if(student.getGroup().getId()==group.getId()){
+                if(Objects.equals(student.getGroup().getId(), group.getId())){
                     Element studentElem = doc.createElement(STUDENT_TAG);
                     studentElem.setAttribute(STUDENT_ID_ATTRIBUTE,String.valueOf(student.id));
                     studentElem.setAttribute(STUDENT_FNAME_ATTRIBUTE,student.getFirstName());
@@ -202,15 +202,7 @@ public class EducationalDepartment {
         }
     }
 
-    public Group getGroupInd(int index){
-        try{
-            return groups.get(index);
-        }
-        catch (IndexOutOfBoundsException e){
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+
     public int countGroups(){
         return groups.size();
     }
@@ -255,7 +247,7 @@ public class EducationalDepartment {
         for(Group group:groups){
             System.out.println(" - "+group);
             for(Student student: students){
-                if(student.getGroup().getId()==group.getId()){
+                if(Objects.equals(student.getGroup().getId(), group.getId())){
                     System.out.println(" - - "+student);
                 }
             }

@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Student implements Serializable{
     public Integer id;
-    private String firstName;
-    private String lastName;
-    private Group group;
-    private double averageMark;
+    private final String firstName;
+    private final String lastName;
+    private final Group group;
+    private final double averageMark;
 
     public Student(Integer id,String first_name,String last_name,double average_mark,Group group){
         this.id = id;

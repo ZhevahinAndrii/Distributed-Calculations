@@ -4,6 +4,7 @@ import models.Group;
 import models.Student;
 
 import java.util.Scanner;
+import java.util.Optional;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
@@ -22,13 +23,15 @@ public class Main {
                         8. Get student by id
                         9. Get all groups
                         10. Get all students with group id
-                        11. Exit
+                        11. Amount of groups
+                        12. Amount of students
+                        13. Exit
                         """;
 
         System.out.println(commands);
         Integer operation = null;
         Scanner scanner = new Scanner(System.in);
-        while (operation == null || operation != 11) {
+        while (operation == null || operation != 13) {
             System.out.println("Input operation:");
             operation = Integer.parseInt(scanner.next());
             try {
@@ -46,14 +49,19 @@ public class Main {
                     }
                     case 3->{
                         int groupId = getNumberInput("Input group id:");
-                        dao.deleteGroup(groupId);
-                        System.out.println("Operation completed successfully");
+                        if (dao.deleteGroup(groupId)==0){
+                            System.out.println("There is no such a group with given id");
+                        }
+                        else
+                            System.out.println("Operation completed successfully");
 
                     }
                     case 4->{
                         int studentId =getNumberInput("Input student id:");
-                        dao.deleteStudent(studentId);
-                        System.out.println("Opeartion complted successfully");
+                        if(dao.deleteStudent(studentId)==0)
+                            System.out.println("There is no such a student with given id");
+                        else
+                            System.out.println("Operation completed succesfully");
                     }
                     case 5->{
                         Group group = getGroupInput(true,true,true);
@@ -67,13 +75,25 @@ public class Main {
                     }
                     case 7->{
                         int groupId = getNumberInput("Enter group id:");
-                        System.out.println(dao.findGroupById(groupId));
-                        System.out.println("Operation completed successfully");
+                        Optional<Group> group = dao.findGroupById(groupId);
+                        if (group.isEmpty()){
+                            System.out.println("There is no such a group with given id");
+                        }
+                        else {
+                            System.out.println(group.get());
+                            System.out.println("Operation completed successfully");
+                        }
                     }
                     case 8->{
                         int studentId = getNumberInput("Enter student id:");
-                        System.out.println(dao.findStudentById(studentId));
+                        Optional<Student> student = dao.findStudentById(studentId);
+                        if(student.isEmpty()){
+                            System.out.println("There is no such a student with given id");
+                        }
+                        else{
+                        System.out.println(student.get());
                         System.out.println("Operation completed successfully");
+                        }
                     }
                     case 9->{
                         System.out.println(dao.findAllGroups());
@@ -84,7 +104,19 @@ public class Main {
                         System.out.println(dao.findAllStudentsWithGroupId(groupId));
                         System.out.println("Operation completed successfully");
                     }
-                    case 11-> System.out.println("Program stopped");
+                    case 11->{
+                        if (dao.countGroups().isEmpty())
+                            System.out.println("Amount of groups:0");
+                        else
+                            System.out.println("Amount of groups:" + dao.countGroups().get());
+                    }
+                    case 12->{
+                        if(dao.countStudents().isEmpty())
+                            System.out.println("Amount of students:0");
+                        else
+                            System.out.println("Amount of students:"+dao.countStudents().get());
+                    }
+                    case 13-> System.out.println("Program stopped");
                 }
             }
             catch (Exception e){
