@@ -16,8 +16,8 @@
                                             <xs:attribute  name="averageMark" use="required">
                                                 <xs:simpleType>
                                                     <xs:restriction base="xs:double">
-                                                        <xs:minExclusive value="0"/>
-                                                        <xs:maxExclusive value="100"/>
+                                                        <xs:minInclusive value="60"/>
+                                                        <xs:maxInclusive value="100"/>
                                                     </xs:restriction>
                                                 </xs:simpleType>
                                             </xs:attribute>
