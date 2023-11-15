@@ -17,3 +17,10 @@ CREATE TABLE student (
                          group_id int not null,
                          foreign key (group_id) references `group`(id) on delete cascade
 );
+
+ALTER TABLE `group`
+ADD CONSTRAINT name_uniqueness UNIQUE (name);
+
+ALTER TABLE `student`
+ADD CONSTRAINT name_uniqueness UNIQUE (first_name,last_name);
+

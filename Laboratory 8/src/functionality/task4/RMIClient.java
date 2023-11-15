@@ -28,7 +28,7 @@ public class RMIClient {
             Integer operation = null;
 
             System.out.println(commands);
-            while(operation==null||operation!=11){
+            while(operation==null||operation!=10){
                 System.out.println("Input operation:");
                 operation = Integer.parseInt(scanner.nextLine());
                 try{
