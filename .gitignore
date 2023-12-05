@@ -4,5 +4,6 @@ out/
 *.gitignore
 *.vcxproj
 *.vcxproj.filters
-*.vcxproj.users
+*.vcxproj.user
 *.sln
+.vs/Lab6/
