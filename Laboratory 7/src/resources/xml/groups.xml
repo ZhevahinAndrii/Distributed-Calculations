@@ -4,6 +4,7 @@
         <student averageMark="78.54" first_name="Andrii" id="1" last_name="Zhevahin"/>
         <student averageMark="85.23" first_name="Vladislav" id="2" last_name="Voloshyn"/>
         <student averageMark="95.24" first_name="Alex" id="3" last_name="Volkov"/>
+        <student averageMark="85.21" first_name="Andrii" id="6" last_name="Zhevahin"/>
     </group>
     <group id="2" name="IPS-32">
         <student averageMark="60.8" first_name="Stanislav" id="4" last_name="Kobzar"/>

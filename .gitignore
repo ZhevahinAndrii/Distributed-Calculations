@@ -2,3 +2,7 @@
 out/
 *.iml
 *.gitignore
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.users
+*.sln
